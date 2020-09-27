@@ -3,6 +3,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep as tm
+import sys
 
 
 class Sherwin():
@@ -15,19 +16,78 @@ class Sherwin():
 
         self.driver = webdriver.Chrome(chrome_options= options)
         self.driver.get('https://www.sherwin-williams.com.br/cores')
-        tm(4)
+
+        tm(2)
 
     def getColors(self):
 
-        colorsinit = self.driver.find_elements_by_class_name('item')
+        namecolor = ''
+        idcolor = ''
+        hexcolor = ''
+        text_final = '"ColorName","ColorId","ColorHex"\n'
+        line = []
+        links = [
+            'https://www.sherwin-williams.com.br/cor_base/vermelhos-alaranjados/',
+            'https://www.sherwin-williams.com.br/cor_base/amarelos-verdes/',
+            'https://www.sherwin-williams.com.br/cor_base/azul-violetas/',
+            'https://www.sherwin-williams.com.br/cor_base/neutros1/',
+            'https://www.sherwin-williams.com.br/cor_base/neutros2/',
+            'https://www.sherwin-williams.com.br/cor_base/brancos-pasteis/',
+            'https://www.sherwin-williams.com.br/cor_base/colecao-atemporal/',
+            'https://www.sherwin-williams.com.br/cor_base/cores-marcantes/'  ]
+        elements = []
+        num_site = 0
 
-        for color in colorsinit:
+        index = 0
+        
+        self.driver.get(links[0])
+        tm(3)
+        while(True):
 
-            color.click()
+            index = index+1
 
-            tm(4)
+            for i in range(1,8):
+                try:
+                    element = self.driver.find_element_by_xpath(f'/html/body/div[1]/div/div[2]/div[2]/div/div/ul[{index}]/li[{i}]/a')
+                    namecolor = element.get_attribute('data-titulo')
+                    idcolor = element.get_attribute('data-codigo')
+                    hexcolor = '#'+element.get_attribute('data-cor')
+                    text_final = text_final+f'"{namecolor}"'+','+f'"{idcolor}"'+','+f'"{hexcolor}"'+'\n'
+                    print(namecolor)
+                except:
+                    num_site =num_site+1
+                    try:
+                        self.driver.get(links[num_site])
+                    except:
+                        open('data_sherwin.csv','w', -1, "utf-8").write(text_final)    
+                        read_file = pd.read_csv(open('data_sherwin.csv','rb'))
+                        read_file.to_excel('data_Sherwin.xlsx', index = None, header=True)
+                        return
+                    index = 0
+                    tm(4)
+                    break
+        
+
+                
+
+                                                             
 
 
+
+            
+
+        
+ 
+                
+            
+                    
+                    
+                                                           
+
+                                             
+            
+
+        
 
 tinta = Sherwin()
 tinta.getColors()

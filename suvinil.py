@@ -19,7 +19,7 @@ class Suvinil():
     
     def getColors(self,numColor):
 
-        arquivo = pd.ExcelWriter
+       
         namecolor = []
         idcolor = []
         hexcolor = []
