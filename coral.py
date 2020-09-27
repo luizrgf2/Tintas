@@ -38,13 +38,13 @@ class Coral():
             'https://www.coral.com.br/pt/paletas-de-cor/h_cool%20neutral',
             'https://www.coral.com.br/pt/paletas-de-cor/h_warm%20neutral']
 
-        index = 1
-        for link in links:
+        index = 1 #variavel para pegar os objetos em cada posição do html
+        for link in links: #passando por cada link referente a cada tom
 
             self.driver.get(link+'?tab=2')
             tm(4)
 
-            while(True):
+            while(True): #usando laço infinito por nao ter como saber a quantidade de objetos e esperando dar erro de index para sair do laço
                 try:
                     element = self.driver.find_element_by_xpath(f'/html/body/div[3]/div/div/section/div/section/section[2]/div/div[2]/div/section/div/div[{index}]/a')
                     namecolor = element.get_attribute('data-title')
@@ -62,17 +62,18 @@ class Coral():
 
                 self.driver.get(link+'?tab=1')
                 tm(7)
-                self.driver.find_element_by_class_name('content-closed ').click()
+                self.driver.find_element_by_class_name('content-closed ').click() # botao para mostrar mais cores
                                                   
 
                 tm(2)
                 try:
-                    while(True):
-                    
-                        controller = element = self.driver.find_element_by_xpath(f'/html/body/div[3]/div/div/section/div/section/section[2]/div/div[2]/div[2]/div[{index}]/div[2]/div[1]/a')
+                    while(True): #pegando dados das cores
+                        
+                        #usando como base para se caso for retornado um erro ele saira do laço
+                        element = self.driver.find_element_by_xpath(f'/html/body/div[3]/div/div/section/div/section/section[2]/div/div[2]/div[2]/div[{index}]/div[2]/div[1]/a')
                         
                         
-                        try:
+                        try: #caso retorne um erro saira do laço e continuara no proximo tom de cor
                             element = self.driver.find_element_by_xpath(f'/html/body/div[3]/div/div/section/div/section/section[2]/div/div[2]/div[2]/div[{index}]/div[2]/div[{groumps}]/a')
                             
                         except:
@@ -90,9 +91,13 @@ class Coral():
 
                     break
         
+        
+        
+        #escrevendo no arquivo csv e depois convertendo para excel 
         open('data_coral.csv','w', -1, "utf-8").write(text_final)    
         read_file = pd.read_csv(open('data_coral.csv','rb'))
         read_file.to_excel('data_Coral.xlsx', index = None, header=True)
+        #####
                                                               
                                                              
 

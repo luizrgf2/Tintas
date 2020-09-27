@@ -25,11 +25,12 @@ class Suvinil():
         hexcolor = []
         text_final = '"ColorName","ColorId","ColorHex"\n'
 
-
+        #No site as cores são separadas em tons claros e escuros
         coresclaras = self.driver.execute_script('return document.getElementsByClassName("item item-color light");')
         coresescuras = self.driver.execute_script('return document.getElementsByClassName("item item-color dark");')
+        ########
 
-        for i in range(len(coresclaras)-1):
+        for i in range(len(coresclaras)-1):#pegando dados dos tons claros
 
 
 
@@ -41,7 +42,7 @@ class Suvinil():
             text_final = text_final+f'"{namecolor[i]}"'+','+f'"{idcolor[i]}"'+','+f'"{hexcolor[i]}"'+'\n'
 
 
-        for i in range(len(coresescuras)):
+        for i in range(len(coresescuras)):#pegando dados dos tons escuros
 
 
 
@@ -56,10 +57,11 @@ class Suvinil():
 
 
 
-            
+        #escrevendo no arquivo csv e depois convertendo para excel   
         open('data_suvinil.csv','w', -1, "utf-8").write(text_final)    
         read_file = pd.read_csv(open('data_suvinil.csv','rb'))
         read_file.to_excel('data_Suvinil.xlsx', index = None, header=True)
+        #####
 
     def converColortohex(self,rgb):
 

@@ -34,18 +34,17 @@ class Sherwin():
             'https://www.sherwin-williams.com.br/cor_base/brancos-pasteis/',
             'https://www.sherwin-williams.com.br/cor_base/colecao-atemporal/',
             'https://www.sherwin-williams.com.br/cor_base/cores-marcantes/'  ]
-        elements = []
         num_site = 0
 
         index = 0
         
         self.driver.get(links[0])
         tm(3)
-        while(True):
+        while(True): # usando um laço infinito por nao ter como pegar os objetos previamente e saber o tamanho da lista
 
             index = index+1
 
-            for i in range(1,8):
+            for i in range(1,8): #cada linha tem 8 posiçoes, pegando objetos de cada linha
                 try:
                     element = self.driver.find_element_by_xpath(f'/html/body/div[1]/div/div[2]/div[2]/div/div/ul[{index}]/li[{i}]/a')
                     namecolor = element.get_attribute('data-titulo')
