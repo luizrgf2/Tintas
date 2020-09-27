@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep as tm
 from colormap import rgb2hex
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class Suvinil():
@@ -13,7 +14,7 @@ class Suvinil():
         options = webdriver.ChromeOptions()
         options.add_argument("--headless")
 
-        self.driver = webdriver.Chrome(chrome_options= options)
+        self.driver = webdriver.Chrome(chrome_options= options,executable_path=ChromeDriverManager().install())
         self.driver.get('https://www.suvinil.com.br/cores/todas-as-cores')
         tm(4)
     

@@ -3,6 +3,7 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep as tm
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class Coral():
@@ -11,7 +12,7 @@ class Coral():
         options = webdriver.ChromeOptions()
         options.add_argument("--headless")
 
-        self.driver = webdriver.Chrome(chrome_options= options)
+        self.driver = webdriver.Chrome(chrome_options= options,executable_path=ChromeDriverManager().install())
         self.driver.get('https://www.coral.com.br/pt/paletas-de-cor/h_white')
         tm(3)
         self.driver.find_element_by_xpath('/html/body/div[11]/section/div/article/div[3]/a[1]').click()

@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep as tm
 from colormap import rgb2hex
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 class Eucatex():
@@ -13,7 +14,7 @@ class Eucatex():
         options = webdriver.ChromeOptions()
         options.add_argument("--headless")
 
-        self.driver = webdriver.Chrome(chrome_options= options)
+        self.driver = webdriver.Chrome(chrome_options= options,executable_path=ChromeDriverManager().install())
         self.driver.get('https://www.eucatex.com.br/tintas/e-colors')
         tm(4)
     def getColors(self):
