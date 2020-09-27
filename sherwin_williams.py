@@ -3,7 +3,6 @@ import pandas as pd
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from time import sleep as tm
-import sys
 
 
 class Sherwin():
@@ -12,7 +11,7 @@ class Sherwin():
     def __init__(self):
 
         options = webdriver.ChromeOptions()
-        #options.add_argument("--headless")
+        options.add_argument("--headless")
 
         self.driver = webdriver.Chrome(chrome_options= options)
         self.driver.get('https://www.sherwin-williams.com.br/cores')
