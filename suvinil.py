@@ -18,7 +18,7 @@ class Suvinil():
         self.driver.get('https://www.suvinil.com.br/cores/todas-as-cores')
         tm(4)
     
-    def getColors(self,numColor):
+    def getColors(self):
 
        
         namecolor = []
@@ -76,9 +76,6 @@ class Suvinil():
         
                                           
 
-
-Su = Suvinil()
-Su.getColors(2000)
 
 
   

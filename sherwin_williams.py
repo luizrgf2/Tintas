@@ -88,7 +88,5 @@ class Sherwin():
 
         
 
-tinta = Sherwin()
-tinta.getColors()
 
 

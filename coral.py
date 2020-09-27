@@ -103,6 +103,3 @@ class Coral():
                                                              
 
                 
-
-coral = Coral()
-coral.getColors()

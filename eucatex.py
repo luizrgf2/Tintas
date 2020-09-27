@@ -68,8 +68,6 @@ class Eucatex():
         colorrgb = rgb.split(',')
 
         return rgb2hex(int(colorrgb[0]),int(colorrgb[1]),int(colorrgb[2]))                      
-eucatex = Eucatex()
-eucatex.getColors()
 
             
 
