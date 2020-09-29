@@ -21,6 +21,10 @@ def main():
 
     while(True):
         
+        print('Buscando dados do site da Coral, isso pode demorar um pouco!\n\n')
+
+        coral = Coral()
+        coral.getColors()
         
         print('Buscando dados do site da Eucatex, isso pode demorar um pouco!\n\n')
 
@@ -32,10 +36,6 @@ def main():
         suvinil = Suvinil()
         suvinil.getColors()
 
-        print('Buscando dados do site da Coral, isso pode demorar um pouco!\n\n')
-
-        coral = Coral()
-        coral.getColors()
 
         print('Buscando dados do site da Sherwin, isso pode demorar um pouco!\n\n')
 

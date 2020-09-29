@@ -19,7 +19,8 @@ class Coral():
         
         tm(4)
     def getColors(self):
-
+        
+        verifylist = '' #lista para checagem de nomes repetidos
         namecolor = ''
         idcolor = ''
         hexcolor = ''
@@ -48,14 +49,26 @@ class Coral():
             while(True): #usando laço infinito por nao ter como saber a quantidade de objetos e esperando dar erro de index para sair do laço
                 try:
                     element = self.driver.find_element_by_xpath(f'/html/body/div[3]/div/div/section/div/section/section[2]/div/div[2]/div/section/div/div[{index}]/a')
+
+                        
                     namecolor = element.get_attribute('data-title')
                     idcolor = element.get_attribute('data-colorid')
                     hexcolor = '#'+str(element.get_attribute('data-id'))
-                    text_final = text_final+f'"{namecolor}"'+','+f'"{idcolor}"'+','+f'"{hexcolor}"'+'\n'
-                    print(namecolor)
+                    
+                    
+                    if verifylist.find(namecolor) == -1:
+                    
+                        text_final = text_final+f'"{namecolor}"'+','+f'"{idcolor}"'+','+f'"{hexcolor}"'+'\n'
+                        print(namecolor)
+                    
+                    
+                    verifylist = verifylist+','+namecolor
+                    
+                    
                     index = index+1
                 except:
                     index = 1
+                    verifylist = ''
                     break                         
             groumps = 1
             controller = True
@@ -80,13 +93,16 @@ class Coral():
                         except:
                             index = index+1
                             groumps = 1
+                            verifylist = ''
                             break
                         namecolor = element.get_attribute('data-title')
                         idcolor = element.get_attribute('data-colorid')
                         hexcolor = '#'+str(element.get_attribute('data-id'))
-                        text_final = text_final+f'"{namecolor}"'+','+f'"{idcolor}"'+','+f'"{hexcolor}"'+'\n'
+                        if verifylist.find(namecolor) == -1:
+                            text_final = text_final+f'"{namecolor}"'+','+f'"{idcolor}"'+','+f'"{hexcolor}"'+'\n'
+                            print(namecolor)
+                        verifylist = verifylist+','+namecolor
                         groumps = groumps+1
-                        print(namecolor)
                  
                 except:
 
